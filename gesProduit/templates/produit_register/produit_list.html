@@ -1,0 +1,48 @@
+{% extends "produit_register/base.html" %}
+
+
+{% block content %}
+<table class="table table-striped table-white">
+    <thead class="border-bottom font-weight-bold">
+        <tr>
+            <td>Libelle</td>
+            <td>Reference</td>
+            <td>Quantite</td>
+            <td>Categorie</td>
+            <td> <a href="{% url 'produit_add'%}" class="btn btn-outline-success">
+              <i class="fas fa-plus"></i>
+              Nouveau
+            </a></td>
+            
+        </tr>
+      </thead>
+      <tbody>
+          {% for produit in produits  %}
+          <tr>
+            <td>{{produit.libelle}}</td>
+            <td>{{produit.reference}}</td>
+            <td>{{produit.quantite}}</td>
+            <td>{{produit.categorie}}</td>
+            <td>
+              <a href="{% url 'produit_update' produit.id %}" class="btn text-secondary px-0">
+                <i class="far fa-edit fa-lg"></i>
+              </a>
+            </td>
+            <td>
+              <form action="{% url 'produit_delete' produit.id%}" method="post" autocomplete="off" class="d-inline">
+                {% csrf_token %}
+                <button type="submit" class="btn">
+                  <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+              </button>
+              </form>
+            </td>
+            </tr>
+     
+              
+            
+          {% endfor %}
+      </tbody>
+</table>
+    
+{% endblock content %}
+    
